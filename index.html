@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduPath AI — Learn Smarter, Study Better</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===================== ONBOARDING WIZARD ===================== -->
+<div id="onboarding" class="onboarding">
+  <div class="onboard-card">
+
+    <div class="onboard-progress">
+      <span class="dot active" data-dot="1"></span>
+      <span class="dot" data-dot="2"></span>
+      <span class="dot" data-dot="3"></span>
+      <span class="dot" data-dot="4"></span>
+    </div>
+
+    <!-- Step 1: Who are you -->
+    <section class="ob-step active" id="step-role">
+      <p class="ob-eyebrow">Welcome to EduPath AI</p>
+      <h1>Who's planning today?</h1>
+      <p class="ob-sub">Tell us who you are so we can build the right study plan.</p>
+      <div class="role-grid">
+        <button class="role-card" data-role="student">
+          <span class="role-icon">🎓</span>
+          <span class="role-title">I'm a Student</span>
+          <span class="role-desc">Pick your campus and courses</span>
+        </button>
+        <button class="role-card" data-role="parent">
+          <span class="role-icon">👪</span>
+          <span class="role-title">I'm a Parent</span>
+          <span class="role-desc">Set up a plan for your child</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Step 2a: Student campus -->
+    <section class="ob-step" id="step-campus">
+      <button class="ob-back" data-back="step-role">← Back</button>
+      <p class="ob-eyebrow">Step 2 of 4</p>
+      <h1>Which campus are you at?</h1>
+      <p class="ob-sub">This helps us tailor deadlines and local study groups.</p>
+      <div class="pill-grid" id="campus-list">
+        <button class="pill" data-value="Karachi Campus">Karachi Campus</button>
+        <button class="pill" data-value="Lahore Campus">Lahore Campus</button>
+        <button class="pill" data-value="Islamabad Campus">Islamabad Campus</button>
+        <button class="pill" data-value="Online / Virtual Campus">Online / Virtual Campus</button>
+      </div>
+      <button class="ob-next" id="campus-next" disabled>Continue</button>
+    </section>
+
+    <!-- Step 2b: Parent - child's age -->
+    <section class="ob-step" id="step-age">
+      <button class="ob-back" data-back="step-role">← Back</button>
+      <p class="ob-eyebrow">Step 2 of 4</p>
+      <h1>How old is your child?</h1>
+      <p class="ob-sub">We'll suggest courses that fit their level.</p>
+      <textarea id="child-age" class="ob-textarea" rows="1" placeholder="e.g. 14 years old"></textarea>
+      <button class="ob-next" id="age-next" disabled>Continue</button>
+    </section>
+
+    <!-- Step 3: Course interest (shared) -->
+    <section class="ob-step" id="step-interest">
+      <button class="ob-back" id="interest-back" data-back="">← Back</button>
+      <p class="ob-eyebrow" id="interest-step-label">Step 3 of 4</p>
+      <h1 id="interest-heading">Which course are you interested in?</h1>
+      <p class="ob-sub">Choose one to preview — you can explore the rest later.</p>
+      <div class="ob-course-grid" id="ob-course-grid"></div>
+    </section>
+
+    <!-- Step 4: Preview / Enroll -->
+    <section class="ob-step" id="step-preview">
+      <button class="ob-back" data-back="step-interest">← Back</button>
+      <p class="ob-eyebrow">Step 4 of 4</p>
+      <h1>Here's what you'll get</h1>
+      <div class="preview-box" id="preview-box"></div>
+      <button class="ob-next" id="enroll-btn">Enroll &amp; Enter EduPath AI →</button>
+    </section>
+
+  </div>
+</div>
+
+<!-- ===================== MAIN SITE ===================== -->
+<div id="site" class="site hidden">
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="brand">
+        <img src="edupath-logo.png" alt="EduPath AI logo" class="brand-logo">
+      </a>
+      <nav class="nav-links" id="nav-links">
+        <a href="#home">Home</a>
+        <a href="#courses">Courses</a>
+        <a href="#registration">Registration</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="cart-btn" id="cart-btn" aria-label="Open cart">
+          🛒 <span class="cart-count" id="cart-count">0</span>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Your AI study planner</p>
+      <h1>Transform Knowledge Into Lasting Expertise.<br></h1>
+      <p class="hero-sub">EduPath AI turns your subjects, deadlines and revision time into one clear weekly plan — built for students, trusted by parents.</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" id="hero-trial-btn">Start Free Trial</button>
+        <a href="#courses" class="btn btn-ghost">Browse Courses</a>
+      </div>
+      <p class="hero-note">No credit card needed for your first course — it's free.</p>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <svg class="hero-illustration" viewBox="0 0 520 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a student studying with EduPath AI">
+        <ellipse cx="260" cy="230" rx="230" ry="200" fill="#EAF1FF"/>
+        <circle cx="80" cy="80" r="14" fill="#2F6FED" opacity=".3"/>
+        <circle cx="452" cy="92" r="9" fill="#1AA971" opacity=".4"/>
+        <circle cx="462" cy="345" r="12" fill="#2F6FED" opacity=".25"/>
+        <rect x="120" y="362" width="280" height="14" rx="7" fill="#0B2545" opacity=".08"/>
+        <rect x="225" y="292" width="26" height="76" rx="13" fill="#0B2545"/>
+        <rect x="269" y="292" width="26" height="76" rx="13" fill="#0B2545"/>
+        <rect x="213" y="360" width="48" height="14" rx="7" fill="#2F6FED"/>
+        <rect x="259" y="360" width="48" height="14" rx="7" fill="#2F6FED"/>
+        <path d="M205 200 C205 170 225 155 260 155 C295 155 315 170 315 200 L315 298 L205 298 Z" fill="#2F6FED"/>
+        <path d="M205 210 C175 215 155 235 150 265 L172 275 C180 250 195 235 215 228 Z" fill="#2F6FED"/>
+        <path d="M315 210 C345 220 360 245 358 270 L336 275 C332 252 320 235 305 226 Z" fill="#2F6FED"/>
+        <rect x="118" y="250" width="60" height="44" rx="6" fill="#0B2545"/>
+        <rect x="124" y="256" width="48" height="32" rx="3" fill="#EAF1FF"/>
+        <circle cx="260" cy="130" r="38" fill="#0B2545"/>
+        <path d="M225 118 C225 95 240 82 260 82 C282 82 297 97 296 118 C286 108 270 104 260 104 C248 104 232 110 225 118 Z" fill="#123168"/>
+        <circle cx="106" cy="150" r="30" fill="#FFFFFF" stroke="#E3E9F3" stroke-width="2"/>
+        <path d="M92 146 L106 138 L120 146 L106 154 Z" fill="#0B2545"/>
+        <rect x="102" y="148" width="8" height="14" fill="#0B2545"/>
+        <circle cx="412" cy="150" r="30" fill="#FFFFFF" stroke="#E3E9F3" stroke-width="2"/>
+        <rect x="398" y="140" width="28" height="20" rx="2" fill="#2F6FED"/>
+        <rect x="398" y="140" width="28" height="6" fill="#0B2545"/>
+        <circle cx="404" cy="292" r="30" fill="#FFFFFF" stroke="#E3E9F3" stroke-width="2"/>
+        <rect x="392" y="294" width="6" height="14" fill="#1AA971"/>
+        <rect x="402" y="286" width="6" height="22" fill="#1AA971"/>
+        <rect x="412" y="280" width="6" height="28" fill="#2F6FED"/>
+        <circle cx="118" cy="302" r="24" fill="#FFFFFF" stroke="#E3E9F3" stroke-width="2"/>
+        <path d="M106 298 l8 8 l16 -16" fill="none" stroke="#1AA971" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="hv-card hv-card-1">
+        <span class="hv-label">This week</span>
+        <div class="hv-bar"><span style="width:70%"></span></div>
+        <div class="hv-bar"><span style="width:40%"></span></div>
+        <div class="hv-bar"><span style="width:90%"></span></div>
+      </div>
+      <div class="hv-card hv-card-2">
+        <span class="hv-check">✓</span>
+        <span>Revision block complete</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stat"><strong>6</strong><span>IT courses on track</span></div>
+    <div class="stat"><strong>1</strong><span>Free course to start</span></div>
+    <div class="stat"><strong>24/7</strong><span>Plan access, any device</span></div>
+    <div class="stat"><strong>100%</strong><span>Built around your deadlines</span></div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why" id="why">
+    <div class="section-head">
+      <h2 class="top-courses">Top AI & IT courses We Offered</h2>
+    </div>
+    <div class="why-layout">
+      <div class="why-visual">
+        <center>
+        <img src="ai-meeting.jpg" alt="AI-powered planning discussion">
+        </center>
+        <div class="why-badge">
+          <span class="why-badge-icon">🤖</span>
+          <div>
+            <strong>AI-powered</strong>
+            <span>Plans that adapt to you</span>
+          </div>
+        </div>
+      </div>
+      <div class="why-grid">
+        <div class="why-item">
+          <span class="why-icon">📅</span>
+          <h3>Smart weekly plans</h3>
+          <p>Enter your subjects and deadlines — EduPath AI suggests a realistic weekly study and revision schedule.</p>
+        </div>
+        <div class="why-item">
+          <span class="why-icon">👀</span>
+          <h3>Progress parents can see</h3>
+          <p>A simple, honest view of consistency and completed revision blocks — no exaggerated promises, just visibility.</p>
+        </div>
+        <div class="why-item">
+          <span class="why-icon">📝</span>
+          <h3>Practice built in</h3>
+          <p>Short practice tests attached to every course, so revision turns into confidence before exam day.</p>
+        </div>
+        <div class="why-item">
+          <span class="why-icon">🔔</span>
+          <h3>Reminders that respect focus</h3>
+          <p>Gentle nudges for revision blocks and assignments — timed around your plan, not random notifications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="courses" id="courses">
+    <div class="section-head">
+      <h2>Courses we offer</h2>
+      <p>Start with your first course free. Every course after that is a one-time paid enrollment.</p>
+    </div>
+    <div class="course-grid" id="course-grid"></div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="section-head">
+      <h2>How your free trial works</h2>
+      <p>Four steps from sign-up to your first completed revision block.</p>
+    </div>
+    <ol class="how-steps">
+      <li><span>1</span><div><h4>Tell us who's studying</h4><p>Student or parent, campus or child's age — takes under a minute.</p></div></li>
+      <li><span>2</span><div><h4>Pick a course</h4><p>Choose from our IT course library. Your first course is free.</p></div></li>
+      <li><span>3</span><div><h4>Get your weekly plan</h4><p>EduPath AI suggests subjects, deadlines and revision blocks for the week.</p></div></li>
+      <li><span>4</span><div><h4>Study, track, adjust</h4><p>Follow the plan, mark blocks complete, and let it adapt as deadlines shift.</p></div></li>
+    </ol>
+  </section>
+
+  <!-- REGISTRATION -->
+  <section class="registration" id="registration">
+    <div class="reg-card">
+      <div class="section-head left">
+        <h2>Create your free account</h2>
+        <p>Start with one free course. Upgrade anytime for the full course library.</p>
+      </div>
+      <form id="registration-form" class="reg-form">
+        <div class="field-row">
+          <div class="field"><label>Full name</label><input type="text" required placeholder="Your name"></div>
+          <div class="field"><label>Email</label><input type="email" required placeholder="you@example.com"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>I am a</label>
+            <select required>
+              <option value="">Select one</option>
+              <option>Student</option>
+              <option>Parent</option>
+            </select>
+          </div>
+          <div class="field"><label>Course interest</label>
+            <select id="reg-course-select" required></select>
+          </div>
+        </div>
+        <label class="checkbox-row">
+          <input type="checkbox" required>
+          I agree this is a demo trial and no real payment or personal data is required.
+        </label>
+        <button type="submit" class="btn btn-primary btn-wide">Start Free Trial</button>
+        <p class="reg-confirm hidden" id="reg-confirm">You're in! Check the confirmation below — this is a simulated sign-up for demo purposes.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="section-head">
+      <h2>Get in touch</h2>
+      <p>Questions from students, parents or institutions — we usually reply within a day.</p>
+    </div>
+    <div class="contact-grid">
+      <form id="contact-form" class="contact-form">
+        <div class="field"><label>Name</label><input type="text" required placeholder="Your name"></div>
+        <div class="field"><label>Email</label><input type="email" required placeholder="you@example.com"></div>
+        <div class="field"><label>Message</label><textarea rows="4" required placeholder="How can we help?"></textarea></div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <p class="reg-confirm hidden" id="contact-confirm">Message sent — thanks, we'll be in touch soon.</p>
+      </form>
+      <div class="contact-info">
+        <div class="info-item"><strong>Support</strong><span>support@edupath.ai</span></div>
+        <div class="info-item"><strong>Campuses</strong><span>Karachi · Lahore · Islamabad · Online</span></div>
+        <div class="info-item"><strong>Hours</strong><span>Mon–Sat, 9am–7pm</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="edupath-logo.png" alt="EduPath AI logo" class="brand-logo footer-logo">
+        <p>Plan smarter. Study better. A demo AI study-planning project.</p>
+      </div>
+      <div class="footer-links">
+        <div><h5>Explore</h5><a href="#home">Home</a><a href="#courses">Courses</a><a href="#registration">Registration</a></div>
+        <div><h5>Company</h5><a href="#contact">Contact</a><a href="#why">Why EduPath AI</a><a href="#how">How it works</a></div>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2026 EduPath AI — demo project. All course content and results are illustrative.</p>
+  </footer>
+
+  <!-- COURSE DETAIL MODAL -->
+  <div class="modal" id="course-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close">✕</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- CART DRAWER -->
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-head">
+      <h3>Your cart</h3>
+      <button id="cart-close" aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-foot">
+      <div class="cart-total"><span>Total</span><strong id="cart-total">$0</strong></div>
+      <button class="btn btn-primary btn-wide" id="checkout-btn">Checkout</button>
+    </div>
+  </div>
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
