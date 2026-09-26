@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPath AI - Flow Diagram</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <style>
+        body { font-family: sans-serif; padding: 2rem; background: #f9f9f9; }
+        .mermaid-container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: inline-block;}
+        .instructions { margin-bottom: 2rem; color: #333; }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h2>EduPath AI Flow Diagram</h2>
+        <p><strong>Download Instructions:</strong> Right-click on the diagram below and select <strong>"Save image as..."</strong> (ya "Save as...") taake aap isey image ke taur par save kar sakein.</p>
+    </div>
+    <div class="mermaid-container">
+        <div class="mermaid">
+        graph TD
+            Start[User Visits Website] --> CheckOnboarding{Is it the user's first visit / Start Trial?}
+            
+            %% Onboarding Flow
+            CheckOnboarding -->|Yes| OnboardingStart[Onboarding Wizard: Step 1]
+            OnboardingStart --> RoleSelection{Who are you?}
+            RoleSelection -->|I'm a Student| CampusSelection[Step 2a: Select Campus<br/>Karachi/Lahore/Islamabad/Online]
+            RoleSelection -->|I'm a Parent| ChildAge[Step 2b: Enter Child's Age]
+            
+            CampusSelection --> CourseInterest[Step 3: Select Course Interest]
+            ChildAge --> CourseInterest
+            
+            CourseInterest --> Preview[Step 4: Preview / Enroll]
+            Preview -->|Enroll & Enter| MainSite
+            
+            %% Main Site Flow
+            CheckOnboarding -->|No| MainSite[Main Site]
+            
+            %% Main Site Sections
+            MainSite --> Navbar
+            Navbar --> Hero[Hero Section]
+            Navbar --> Courses[Courses Section]
+            Navbar --> Registration[Registration Form]
+            Navbar --> Contact[Contact Section]
+            Navbar --> Cart[Cart Drawer]
+            
+            %% Interactions
+            Hero -->|Start Free Trial| OnboardingStart
+            Hero -->|Browse Courses| Courses
+            
+            Courses --> CourseGrid[Course List]
+            CourseGrid -->|Click Course| CourseModal[Course Detail Modal]
+            CourseModal -->|Add to Cart| Cart
+            
+            Cart --> Checkout[Checkout Process]
+            
+            Registration --> SubmitReg[Submit Free Trial Registration]
+            Contact --> SubmitContact[Send Contact Message]
+        </div>
+    </div>
+</body>
+</html>
